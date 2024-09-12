@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIN Protection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        #pinContainer {
+            margin-top: 100px;
+        }
+        #videoContainer {
+            display: none;
+            margin-top: 50px;
+        }
+        input[type="password"] {
+            padding: 10px;
+            font-size: 18px;
+            width: 200px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="pinContainer">
+        <h2>Enter PIN to access the stream</h2>
+        <input type="password" id="pinInput" placeholder="Enter 4-digit PIN" maxlength="4" />
+        <br>
+        <button onclick="checkPin()">Submit</button>
+        <p id="errorMessage" style="color: red; display: none;">Incorrect PIN, please try again.</p>
+    </div>
+
+    <div id="videoContainer">
+        <h2>Streaming Video</h2>
+        <video id="videoPlayer" width="600" controls>
+            <source src="https://your-streaming-url.com/stream.m3u8" type="application/x-mpegURL">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        const correctPin = "5324";  // الكود السري الصحيح
+
+        function checkPin() {
+            const enteredPin = document.getElementById("pinInput").value;
+            const errorMessage = document.getElementById("errorMessage");
+
+            if (enteredPin === correctPin) {
+                document.getElementById("pinContainer").style.display = "none";  // إخفاء طلب الـ PIN
+                document.getElementById("videoContainer").style.display = "block";  // عرض الفيديو
+            } else {
+                errorMessage.style.display = "block";  // عرض رسالة خطأ
+            }
+        }
+    </script>
+</body>
+</html>
